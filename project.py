@@ -394,6 +394,17 @@ def calculate_kurtosis(df, variable):
     return stats.kurtosis(df[variable])
 
 
+# Supprimer les lignes avec des NaN dans la colonne 'GDP'
+df_initial = df_initial.dropna(subset=['GDP'])
+
+# Ou remplacer les NaN par la moyenne, la médiane, ou une autre valeur
+df_initial['GDP'] = df_initial['GDP'].fillna(df_initial['GDP'].mean())
+
+
+print(df_initial['GDP'].describe())
+print(f"Nombre de NaN : {df_initial['GDP'].isna().sum()}")
+
+
 weighted_mean_val = weighted_mean(centers, effectifs_rel)
 print(f"Moyenne pondérée : {weighted_mean_val}")
 
